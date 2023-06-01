@@ -1,0 +1,3 @@
+85;BMW;PLA-4Y00;99999999999;R$100.000,00;R$99.000,00;2022;2023;Gasolina;0;/home/Igor/Downloads/GitHub/Aluguel-de-Carros-JAVA-Desktop/src/com/nohair/dados/img/Modelos Veiculos/BMW.jpg;
+86;DODGE;PLA-4Y44;99999999999;R$100.000,00;R$99.000,00;2022;2023;Diesel;0;/home/Igor/Downloads/GitHub/Aluguel-de-Carros-JAVA-Desktop/src/com/nohair/dados/img/Modelos Veiculos/dodge.ram.png;
+87;FIAT;NDN-0100;77777777777;R$70.000,00;R$65.000,00;2021;2022;Etanol;90.000;/home/Igor/Downloads/GitHub/Aluguel-de-Carros-JAVA-Desktop/src/com/nohair/dados/img/Modelos Veiculos/uno.jpg;

@@ -1,0 +1,19 @@
+14/10/2022 - Atualização da Branch Igor
+
+17/10/2022 - Programa com Tela Clientes em andamento !
+
+18/10/2022 - Tela Cliente salvando o caminho da imagem no TXT.
+
+25/10/2022 - Tela Cliente gerando erro "campo vazio" tela cadastro, Unico Gerador de ID
+
+19/11/2022 - Tela Cliente com os requisitos nescessários + Mascara Jtextfield CNPJ/CPF
+
+21/11/2022 - Tela Clientes se excluir o TXT ele cria um novo !
+
+09/12/2022 - Tela Clientes MouseCliked / Apresenta os Dados da Grid nos campos / Mascara de CNPJ-CPF / Inicio Tela Cad.Veiculos
+
+09/12/2022 - Tela Cliente - Buscar Cliente Funcionando - Alterar Cliente Funcionando 
+
+11/12/2022 - Tela Veiculos - Implantando Alterar / Buscar / Marca / Modelo / tipo
+
+13/12/2022 - Tela Marca / Modelo - Funcionando Alterar / Salvando ID Marca/modelo 

@@ -1,0 +1,7 @@
+78;DODGE;./src/com/nohair/dados/img/Logos Marcas/ram.png
+79;BMW;./src/com/nohair/dados/img/Logos Marcas/Bmw.png
+80;FIAT;./src/com/nohair/dados/img/Logos Marcas/Fiat.png
+81;VOLKSWAGEN;./src/com/nohair/dados/img/Logos Marcas/Volkswagen.png
+88;TOYOTA;./src/com/nohair/dados/img/Logos Marcas/Toyota.png
+89;FORD;./src/com/nohair/dados/img/Logos Marcas/Ford.png
+92;CHEVROLET;/home/Igor/Downloads/GitHub/Aluguel-de-Carros-JAVA-Desktop/src/com/nohair/dados/img/Logos Marcas/Chevrolet.png
