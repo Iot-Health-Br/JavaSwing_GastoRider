@@ -21,7 +21,6 @@ import java.util.Iterator;
 import javax.swing.table.DefaultTableModel;
 import com.nohair.persistencia.IVeiculosDao;
 import com.nohair.controle.IVeiculosControle;
-import com.nohair.modelos.Clientes;
 import java.io.File;
 import java.text.ParseException;
 import java.util.logging.Level;
@@ -231,7 +230,6 @@ public class TelaDeVeiculos extends javax.swing.JFrame {
         jMenuOpcoes = new javax.swing.JMenu();
         jMenuItemCadastroDeCategorias = new javax.swing.JMenuItem();
         jMenuItemCadastroVeiculo = new javax.swing.JMenuItem();
-        jMenuItemCadastroDeCliente = new javax.swing.JMenuItem();
         jMenuItemCadastroDeModelo = new javax.swing.JMenuItem();
         jMenuItemCadastroDeMarca = new javax.swing.JMenuItem();
         jMenuItemTelaInicial = new javax.swing.JMenuItem();
@@ -665,14 +663,6 @@ public class TelaDeVeiculos extends javax.swing.JFrame {
         });
         jMenuOpcoes.add(jMenuItemCadastroVeiculo);
 
-        jMenuItemCadastroDeCliente.setText("Cadastro do Usuario");
-        jMenuItemCadastroDeCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemCadastroDeClienteActionPerformed(evt);
-            }
-        });
-        jMenuOpcoes.add(jMenuItemCadastroDeCliente);
-
         jMenuItemCadastroDeModelo.setText("Cadastro de Modelo");
         jMenuItemCadastroDeModelo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1012,21 +1002,6 @@ public class TelaDeVeiculos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItemCadastroVeiculoActionPerformed
 
-    private void jMenuItemCadastroDeClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadastroDeClienteActionPerformed
-
-        try {
-            TelaDeClientes cadastroCliente = new TelaDeClientes();
-            cadastroCliente.setLocationRelativeTo(null);
-            cadastroCliente.setVisible(true);
-            this.setVisible(false);
-            cadastroCliente.setResizable(false);
-        }
-        catch (Exception erro) {
-            JOptionPane.showMessageDialog(this, erro);
-        }
-
-    }//GEN-LAST:event_jMenuItemCadastroDeClienteActionPerformed
-
     private void jMenuItemCadastroDeModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadastroDeModeloActionPerformed
         // TODO add your handling code here:
         try {
@@ -1149,7 +1124,6 @@ public class TelaDeVeiculos extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItemCadastroDeCategorias;
-    private javax.swing.JMenuItem jMenuItemCadastroDeCliente;
     private javax.swing.JMenuItem jMenuItemCadastroDeMarca;
     private javax.swing.JMenuItem jMenuItemCadastroDeModelo;
     private javax.swing.JMenuItem jMenuItemCadastroVeiculo;

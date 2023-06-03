@@ -4,28 +4,29 @@
  */
 package com.nohair.controle;
 
-import com.nohair.modelos.admin;
-import com.nohair.persistencia.IAdminDao;
-import com.nohair.persistencia.AdminDao;
+import com.nohair.modelos.Cliente;
+import com.nohair.persistencia.ClienteControleDao;
 import java.util.ArrayList;
 import java.util.Iterator;
+import com.nohair.persistencia.IClienteControle;
 
 /**
  *
  * @author bruno
  */
-public class AdminControle implements IAdminControle{
+public class ClienteControle implements IClienteControle{
     
-    IAdminDao adminPersistencia = null;
-    public AdminControle(){
-        this.adminPersistencia = new AdminDao();
+    IClienteControle adminPersistencia = null;
+    public ClienteControle(){
+        this.adminPersistencia = new ClienteControleDao();
     }
+
     private boolean buscarAdmin(String usuarioAdm)throws Exception{
           try {
-            ArrayList<admin> listagem = adminPersistencia.listagem();
-            Iterator<admin> lista = listagem.iterator();
+            ArrayList<Cliente> listagem = adminPersistencia.listagem();
+            Iterator<Cliente> lista = listagem.iterator();
             while(lista.hasNext()){
-                 admin aux = lista.next();
+                 Cliente aux = lista.next();
                 if(aux.getUsuarioAdm().equalsIgnoreCase(usuarioAdm)){
                     return true;
                 }
@@ -36,7 +37,7 @@ public class AdminControle implements IAdminControle{
         }
     }
     @Override
-    public void incluir(admin objeto) throws Exception {
+    public void incluir(Cliente objeto) throws Exception {
         if(buscarAdmin(objeto.getUsuarioAdm())){
             throw new Exception("Usuario Administrador já foi cadastrado");
         }
@@ -44,12 +45,12 @@ public class AdminControle implements IAdminControle{
     }
 
     @Override
-    public void alterar(admin objeto) throws Exception {
+    public void alterar(Cliente objeto) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public ArrayList<admin> listagem() throws Exception {
+    public ArrayList<Cliente> listagem() throws Exception {
         return adminPersistencia.listagem(); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     

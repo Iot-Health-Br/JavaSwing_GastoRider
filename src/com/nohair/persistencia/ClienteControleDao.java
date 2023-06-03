@@ -4,11 +4,9 @@
  */
 package com.nohair.persistencia;
 
-import com.nohair.modelos.admin;
-import com.nohair.controle.AdminControle;
-import com.nohair.controle.IAdminControle;
-import com.nohair.persistencia.AdminDao;
-import com.nohair.persistencia.IAdminDao;
+import com.nohair.modelos.Cliente;
+import com.nohair.controle.ClienteControle;
+import com.nohair.persistencia.ClienteControleDao;
 import com.nohair.util.id.GeradorID;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -18,20 +16,22 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import com.nohair.controle.IClienteControle;
 
 /**
  *
  * @author bruno
  */
-public class AdminDao implements IAdminDao {
+public class ClienteControleDao implements IClienteControle {
     
     private String nomeDoArquivoNoDisco;
-    public AdminDao() {
+    public ClienteControleDao() {
         nomeDoArquivoNoDisco = "./src/com/nohair/dados/txt/Admin.txt";
     }
+
     
     @Override
-    public void incluir(admin objeto) throws Exception {
+    public void incluir(Cliente objeto) throws Exception {
         try{
             //Escreve o arquivo
             FileWriter fw = new FileWriter(nomeDoArquivoNoDisco,true);
@@ -50,19 +50,19 @@ public class AdminDao implements IAdminDao {
     }
 
     @Override
-    public void alterar(admin objeto) throws Exception {
+    public void alterar(Cliente objeto) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public ArrayList<admin> listagem() throws Exception {
+    public ArrayList<Cliente> listagem() throws Exception {
         try {
-            ArrayList<admin > listaDeAdmin = new ArrayList<admin>();
+            ArrayList<Cliente > listaDeAdmin = new ArrayList<Cliente>();
             FileReader fr = new FileReader(nomeDoArquivoNoDisco);
             BufferedReader br  = new BufferedReader(fr);
             String linha = "";
             while((linha=br.readLine())!=null){
-                admin objetoAdmin = new admin();
+                Cliente objetoAdmin = new Cliente();
                 String vetorString[] = linha.split(";");
                 objetoAdmin.setId(Integer.parseInt(vetorString[0]));
                 objetoAdmin.setUsuarioAdm(vetorString[1]);
