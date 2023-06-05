@@ -4,14 +4,20 @@
  */
 package telaVisao;
 
-import com.nohair.controle.AdminControle;
-import com.nohair.controle.IAdminControle;
-import com.nohair.modelos.admin;
+import com.nohair.controle.ClienteControle;
+import com.nohair.modelos.Cliente;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
+import com.nohair.controle.IClienteControle;
+
 
 /**
  *
@@ -19,23 +25,43 @@ import javax.swing.JOptionPane;
  */
 public class telaInicio extends javax.swing.JFrame {
 
-    IAdminControle adminControle = new AdminControle();
+    IClienteControle clienteControle = new ClienteControle();
+    
+    //Mascaras CNPJ / CPF / ...
+    private MaskFormatter CNPJMask;
+    private MaskFormatter CPFMask;
+    private MaskFormatter NascMask;
+    private MaskFormatter TelMask;
     
     /**
      * Creates new form telaInicio
      */
-    public telaInicio() {
+    public telaInicio() throws ParseException {
         initComponents();
         this.setLocationRelativeTo(null);
          try {
-             ArrayList<admin> lista = adminControle.listagem();
+             ArrayList<Cliente> lista = clienteControle.listagem();
              if(!lista.isEmpty()){
-                //imprimirDadosNaGrid(adminControle.listagem());
+                //imprimirDadosNaGrid(clienteControle.listagem());
              }
          } 
          catch (Exception erro) {
             JOptionPane.showMessageDialog(this, erro);                    
          }
+         
+         // Inicializa a Mascara CNPJ / CPF / ...
+            CNPJMask = new MaskFormatter("##.###.###/####-##");
+            CPFMask = new MaskFormatter("###.###.###-##");
+            NascMask = new MaskFormatter("## / ## / ####");
+            TelMask = new MaskFormatter("+## (###) # #### - ####");
+            
+            Txt_CadNome.setEnabled(false);
+            Txt_CPF_CNPJ.setEnabled(false);
+            Txt_Telefone.setEnabled(false);
+            Txt_email.setEnabled(false);
+            Txt_CadSenha.setEnabled(false);
+            Txt_ConfSenha.setEnabled(false);
+            Txt_Nascimento.setEnabled(false);   
     }
 
     /**
@@ -47,25 +73,156 @@ public class telaInicio extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
+        CpfCnpj = new javax.swing.ButtonGroup();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        PFisica_Pjuridica = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        Txt_ConfSenha = new javax.swing.JPasswordField();
         Txt_CadSenha = new javax.swing.JPasswordField();
-        jTextField1 = new javax.swing.JTextField();
+        Txt_email = new javax.swing.JTextField();
         Txt_CadNome = new javax.swing.JTextField();
         Btn_Cadastrar = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
+        CPF_CNPJ = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        Txt_Telefone = new javax.swing.JFormattedTextField();
+        jLabel9 = new javax.swing.JLabel();
+        Txt_Nascimento = new javax.swing.JFormattedTextField();
+        jRB_CPF = new javax.swing.JRadioButton();
+        jRB_CNPJ = new javax.swing.JRadioButton();
+        Txt_CPF_CNPJ = new javax.swing.JFormattedTextField();
+        jPanel1 = new javax.swing.JPanel();
+        jButton2 = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Gasto Rider");
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastro"));
+
+        PFisica_Pjuridica.setText("Nome :");
+
+        jLabel2.setText("e-mail :");
+
+        jLabel3.setText("Senha :");
+
+        jLabel4.setText("Senha :");
+
+        Btn_Cadastrar.setText("Cadastrar");
+        Btn_Cadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_CadastrarActionPerformed(evt);
+            }
+        });
+
+        CPF_CNPJ.setText("CPF :");
+
+        jLabel8.setText("Telefone :");
+
+        jLabel9.setText("Data de \nNascimento :");
+
+        CpfCnpj.add(jRB_CPF);
+        jRB_CPF.setSelected(true);
+        jRB_CPF.setText("Pessoa Fisica");
+        jRB_CPF.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jRB_CPFMouseClicked(evt);
+            }
+        });
+
+        CpfCnpj.add(jRB_CNPJ);
+        jRB_CNPJ.setText("Pessoa Juridica");
+        jRB_CNPJ.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jRB_CNPJMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(PFisica_Pjuridica)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(CPF_CNPJ, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel9)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(Btn_Cadastrar)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(Txt_CPF_CNPJ, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Txt_ConfSenha, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Txt_CadSenha, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Txt_email, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Txt_Nascimento, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Txt_CadNome, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
+                                    .addComponent(Txt_Telefone, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGap(81, 81, 81))))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jRB_CPF)
+                        .addGap(48, 48, 48)
+                        .addComponent(jRB_CNPJ)
+                        .addGap(43, 43, 43))))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(0, 19, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRB_CPF)
+                    .addComponent(jRB_CNPJ))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(PFisica_Pjuridica)
+                    .addComponent(Txt_CadNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CPF_CNPJ)
+                    .addComponent(Txt_CPF_CNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(Txt_Telefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Txt_email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Txt_Nascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Txt_CadSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Txt_ConfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(27, 27, 27)
+                .addComponent(Btn_Cadastrar)
+                .addGap(17, 17, 17))
+        );
 
         jPanel1.setBackground(new java.awt.Color(153, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Criar Conta"));
 
         jButton2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jButton2.setText("Login");
@@ -101,129 +258,53 @@ public class telaInicio extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastro"));
-
-        jLabel1.setText("Nome :");
-
-        jLabel2.setText("e-mail :");
-
-        jLabel3.setText("Senha :");
-
-        jLabel4.setText("Senha :");
-
-        Btn_Cadastrar.setText("Cadastrar");
-        Btn_Cadastrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Btn_CadastrarActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel3Layout.createSequentialGroup()
-                                    .addGap(15, 15, 15)
-                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jLabel2)
-                                        .addComponent(jLabel1)))
-                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
-                                .addComponent(Txt_CadSenha)
-                                .addComponent(Txt_CadNome)))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jLabel4)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(69, 69, 69)
-                        .addComponent(Btn_Cadastrar)))
-                .addContainerGap(27, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(Txt_CadNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 9, 9)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(Txt_CadSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addComponent(Btn_Cadastrar)
-                .addContainerGap(22, Short.MAX_VALUE))
-        );
-
-        jLabel5.setText("Criar Conta");
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(68, 68, 68)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(147, 147, 147)
-                        .addComponent(jLabel5)))
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addGap(21, 21, 21)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(jLabel5)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(82, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+        private void AtivarCampos(){
+                    Txt_CadNome.setEnabled(true);
+                    Txt_CPF_CNPJ.setEnabled(true);
+                    Txt_Telefone.setEnabled(true);
+                    Txt_email.setEnabled(true);
+                    Txt_CadSenha.setEnabled(true);
+                    Txt_ConfSenha.setEnabled(true);
+                    Txt_Nascimento.setEnabled(true);   
+    }
+    
+    
+    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         
@@ -235,18 +316,96 @@ public class telaInicio extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void Btn_CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_CadastrarActionPerformed
+        //Cadastro de Usuario
         try {        
-            admin objeto = new admin(0,Txt_CadNome.getText(),Txt_CadSenha.getText());
-            adminControle.incluir(objeto);
+            Cliente objeto = new Cliente(0,Txt_CadNome.getText(),Txt_CadSenha.getText(),Txt_CPF_CNPJ.getText(),Txt_Telefone.getText(),
+            Txt_email.getText(),Txt_Nascimento.getText());
+            
+            clienteControle.incluir(objeto);
+            
             Txt_CadNome.setText("");
+            Txt_CPF_CNPJ.setText("");
+            Txt_Telefone.setText("");
+            Txt_email.setText("");
+            Txt_Nascimento.setText("");
             Txt_CadSenha.setText("");
+            Txt_ConfSenha.setText("");
             JOptionPane.showMessageDialog(this,"Usuario Cadastrado com sucesso");
-            //imprimirDadosNaGrid(adminControle.listagem());                
-            } 
-            catch (Exception erro) {
+            //imprimirDadosNaGrid(clienteControle.listagem());                
+        } 
+        catch (Exception erro) {
             JOptionPane.showMessageDialog(this, erro.getMessage());        
+        }
+        // Confirmaçao de Senha
+        try {
+            String password1 = Txt_CadSenha.getText();
+            String password2 = Txt_ConfSenha.getText();
+
+            if (password1.equals(password2)) {
+                JOptionPane.showMessageDialog(this,"Senhas são iguais. Validação bem-sucedida!");
+            } 
+            else {
+                JOptionPane.showMessageDialog(this,"Senhas não são iguais. Validação falhou!");
             }
+        } 
+        catch (Exception e) {
+            System.out.println("Ocorreu um erro durante a validação das senhas: " + e.getMessage());
+        }
     }//GEN-LAST:event_Btn_CadastrarActionPerformed
+
+    private void jRB_CPFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRB_CPFMouseClicked
+      
+        try{   
+                if(jRB_CPF.isSelected()){
+                    AtivarCampos();
+                    Txt_Nascimento.setEnabled(true); 
+                    
+                    //Muda o texto na Tela Pessoa Fisica / Pessoa Juridica
+                    PFisica_Pjuridica.setText("Nome Completo:");
+                    CPF_CNPJ.setText("CPF:"); 
+                    JOptionPane.showMessageDialog(null, "Pessoa Fisica, Selecionada");
+                    
+                    // Formata a Mascara e zera o JtextFieldFormated
+                    // CPFMask = new MaskFormatter("###.###.###-##");        Colocado no inciar do programa     
+                    Txt_CPF_CNPJ.setValue(null);
+                    Txt_CPF_CNPJ.setFormatterFactory(new DefaultFormatterFactory(CPFMask));
+    
+                    Txt_Nascimento.setValue(null);
+                    Txt_Nascimento.setFormatterFactory(new DefaultFormatterFactory(NascMask));
+                    Txt_Telefone.setValue(null);
+                    Txt_Telefone.setFormatterFactory(new DefaultFormatterFactory(TelMask));
+                }   
+            }
+            catch (Exception ERRO){
+                JOptionPane.showMessageDialog(null, "Erro ao formatar campo CPF/CNPJ","Erro",JOptionPane.ERROR);
+            } 
+         
+    }//GEN-LAST:event_jRB_CPFMouseClicked
+
+    private void jRB_CNPJMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRB_CNPJMouseClicked
+       try{
+                if(jRB_CNPJ.isSelected()){
+                    AtivarCampos();
+                    Txt_Nascimento.setEnabled(false);
+                    
+                    //Muda o texto na Tela Pessoa Fisica / Pessoa Juridica
+                    PFisica_Pjuridica.setText("Razao Social:");
+                    CPF_CNPJ.setText("CNPJ:"); 
+                    JOptionPane.showMessageDialog(null, "Pessoa Juridica, Selecionada");
+                    
+                    // Formata a Mascara e zera o JtextFieldFormated
+                    //CNPJMask = new MaskFormatter("##.###.###/####-##");    Colocado no inciar do programa 
+                    Txt_CPF_CNPJ.setValue(null);
+                    Txt_CPF_CNPJ.setFormatterFactory(new DefaultFormatterFactory(CNPJMask));    
+                    
+                    Txt_Telefone.setValue(null);
+                    Txt_Telefone.setFormatterFactory(new DefaultFormatterFactory(TelMask));
+                }
+            }
+            catch (Exception ERRO){
+                JOptionPane.showMessageDialog(null, "Erro ao formatar campo CPF/CNPJ","Erro",JOptionPane.ERROR);
+            } 
+    }//GEN-LAST:event_jRB_CNPJMouseClicked
 
     /**
      * @param args the command line arguments
@@ -278,7 +437,12 @@ public class telaInicio extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                telaInicio a = new telaInicio();    // Comando para iniciar a janela
+                telaInicio a = null;
+                try {
+                    a = new telaInicio(); // Comando para iniciar a janela
+                } catch (ParseException ex) {
+                    Logger.getLogger(telaInicio.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 a.setLocationRelativeTo(null);      // Comando para centralizar a aplicação no centro do monitor
                 a.setVisible(true);                 // Deixar a janela visivel
             }
@@ -287,19 +451,27 @@ public class telaInicio extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Btn_Cadastrar;
+    private javax.swing.JLabel CPF_CNPJ;
+    private javax.swing.ButtonGroup CpfCnpj;
+    private javax.swing.JLabel PFisica_Pjuridica;
+    private javax.swing.JFormattedTextField Txt_CPF_CNPJ;
     private javax.swing.JTextField Txt_CadNome;
     private javax.swing.JPasswordField Txt_CadSenha;
+    private javax.swing.JPasswordField Txt_ConfSenha;
+    private javax.swing.JFormattedTextField Txt_Nascimento;
+    private javax.swing.JFormattedTextField Txt_Telefone;
+    private javax.swing.JTextField Txt_email;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JRadioButton jRB_CNPJ;
+    private javax.swing.JRadioButton jRB_CPF;
     // End of variables declaration//GEN-END:variables
 }

@@ -29,8 +29,6 @@ public class telaAdminOpcoes extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         Bt_Cad_Veiculos = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        Bt_Cad_Cliente = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
         Bt_Cad_Marcas = new javax.swing.JButton();
         Bt_Cad_Modelos = new javax.swing.JButton();
 
@@ -53,22 +51,6 @@ public class telaAdminOpcoes extends javax.swing.JFrame {
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
-            }
-        });
-
-        Bt_Cad_Cliente.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        Bt_Cad_Cliente.setText("Cadastrar Usuario");
-        Bt_Cad_Cliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Bt_Cad_ClienteActionPerformed(evt);
-            }
-        });
-
-        jButton5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButton5.setText("Conf. Usuario");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
             }
         });
 
@@ -96,41 +78,34 @@ public class telaAdminOpcoes extends javax.swing.JFrame {
                 .addGap(56, 56, 56))
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(Bt_Cad_Cliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(Bt_Cad_Modelos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Bt_Cad_Veiculos, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
                     .addComponent(Bt_Cad_Marcas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(Bt_Cad_Modelos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(36, Short.MAX_VALUE))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {Bt_Cad_Cliente, Bt_Cad_Marcas, Bt_Cad_Modelos, Bt_Cad_Veiculos, jButton5});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {Bt_Cad_Marcas, Bt_Cad_Modelos, Bt_Cad_Veiculos});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Bt_Cad_Cliente)
-                    .addComponent(jButton5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Bt_Cad_Veiculos)
+                .addGap(15, 15, 15)
+                .addComponent(Bt_Cad_Modelos, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Bt_Cad_Marcas, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Bt_Cad_Modelos, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Bt_Cad_Veiculos)
-                    .addComponent(jButton2))
+                .addComponent(Bt_Cad_Marcas, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17)
+                .addComponent(jButton2)
                 .addContainerGap(105, Short.MAX_VALUE))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {Bt_Cad_Cliente, Bt_Cad_Marcas, Bt_Cad_Modelos, Bt_Cad_Veiculos, jButton5});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {Bt_Cad_Marcas, Bt_Cad_Modelos, Bt_Cad_Veiculos});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -153,12 +128,6 @@ public class telaAdminOpcoes extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void Bt_Cad_ClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bt_Cad_ClienteActionPerformed
-            TelaDeClientes b = new TelaDeClientes();
-            this.dispose();
-            b.setVisible(true);
-    }//GEN-LAST:event_Bt_Cad_ClienteActionPerformed
-
     private void Bt_Cad_MarcasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bt_Cad_MarcasActionPerformed
             //telaAdminCadVeiculo f = new telaAdminCadVeiculo();
             TelaDeMarcas f = new TelaDeMarcas();
@@ -171,14 +140,6 @@ public class telaAdminOpcoes extends javax.swing.JFrame {
             this.dispose();
             f.setVisible(true);
     }//GEN-LAST:event_Bt_Cad_ModelosActionPerformed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-        telaAdminCadFuncionario b = new telaAdminCadFuncionario();
-        this.dispose();
-        b.setVisible(true);
-
-    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -216,12 +177,10 @@ public class telaAdminOpcoes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Bt_Cad_Cliente;
     private javax.swing.JButton Bt_Cad_Marcas;
     private javax.swing.JButton Bt_Cad_Modelos;
     private javax.swing.JButton Bt_Cad_Veiculos;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,12 +4,13 @@
  */
 package telaVisao;
 
-import com.nohair.modelos.admin;
-import com.nohair.persistencia.AdminDao;
+import com.nohair.modelos.Cliente;
+import com.nohair.persistencia.ClienteControleDao;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -21,7 +22,7 @@ import telaVisao.telaAdminOpcoes;
  */
 public class telaAdminLogin extends javax.swing.JFrame {
     
-    //admin admin = new admin();
+    //admin Cliente = new Cliente();
     
     
     
@@ -33,7 +34,7 @@ public class telaAdminLogin extends javax.swing.JFrame {
      */
     public telaAdminLogin() {
         initComponents();
-        AdminDao objeto = new AdminDao();
+        ClienteControleDao objeto = new ClienteControleDao();
         objeto.ChecarTxt();
     }
 
@@ -143,14 +144,14 @@ public class telaAdminLogin extends javax.swing.JFrame {
             Vamos pegar o usuario e a senha do administrador e validar
         */
         
-      /* admin.*///String usuarioAdm="admin";
-      /* admin.*///String senhaAdm= "admin";
+      /* Cliente.*///String usuarioAdm="Cliente";
+      /* Cliente.*///String senhaAdm= "Cliente";
         
         
         // String usuarioAdm = CampoUsuarioAdm.getText();
         // String senhaAdm = String.valueOf(CampoSenhaAdm.getPassword());
         
-        /*if( "admin".equals(usuarioAdm) && senhaAdm=="admin" ){   //usuarioAdm.equals(admin.getUsuarioAdm()) && senhaAdm.equals(admin.getSenhaAdm())){
+        /*if( "Cliente".equals(usuarioAdm) && senhaAdm=="Cliente" ){   //usuarioAdm.equals(Cliente.getUsuarioAdm()) && senhaAdm.equals(Cliente.getSenhaAdm())){
             telaAdminOpcoes f = new telaAdminOpcoes();
             this.dispose();
             f.setVisible(true);
@@ -215,7 +216,9 @@ public class telaAdminLogin extends javax.swing.JFrame {
                 
                 
                 e10.printStackTrace();
-            }
+            } catch (ParseException ex) {
+            Logger.getLogger(telaAdminLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         
     }//GEN-LAST:event_btnLoginActionPerformed
